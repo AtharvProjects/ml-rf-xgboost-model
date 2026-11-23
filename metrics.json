@@ -1,0 +1,16 @@
+{
+    "Random Forest": {
+        "Accuracy": 0.8654,
+        "Precision": 0.5,
+        "Recall": 0.7143,
+        "F1_Score": 0.5882,
+        "ROC_AUC": 0.7079
+    },
+    "XGBoost": {
+        "Accuracy": 0.8269,
+        "Precision": 0.375,
+        "Recall": 0.4286,
+        "F1_Score": 0.4,
+        "ROC_AUC": 0.6921
+    }
+}

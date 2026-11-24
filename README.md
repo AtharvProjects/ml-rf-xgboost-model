@@ -72,21 +72,50 @@ Located in [`benchmark_100_samples/`](./benchmark_100_samples/):
 
 $$\boxed{\hat{Y} = 419.8034 - 1.8575 X_1 + 42.2294 X_2 - 0.1166 X_3 - 0.3831 X_4 + 4.2214 X_5 + 6.1404 X_6 + 2.7977 X_7 - 1.4406 X_8 + 87.9806 X_9}$$
 
-### 🧪 Testing Custom Data Entries
+---
 
-#### 1. Single Custom Entry CLI
+### 🧪 Step-by-Step: How to Test Against Custom Entries
+
+#### Step 1: Prepare Your 9 Inputs
+Ensure your custom values correspond to the 9 thermodynamic parameters:
+- `X1` (Ambient Temp): $10 - 35$ °C
+- `X2` (Ambient Press): $0.98 - 1.04$ bar
+- `X3` (Humidity): $30 - 90$ %
+- `X4` (Exhaust Vac): $25 - 75$ cm Hg
+- `X5` (Turbine Press): $12 - 20$ bar
+- `X6` (Fuel Flow): $8 - 25$ kg/s
+- `X7` (Steam Flow): $15 - 50$ kg/s
+- `X8` (Cooling Temp): $12 - 30$ °C
+- `X9` (Gen Efficiency): $0.92 - 0.98$
+
+#### Step 2: Choose Your Testing Method
+
+**1. CLI Single Entry Test:**
 ```bash
 cd benchmark_100_samples
-python3 predict_custom.py --x1 25.0 --x2 1.015 --x3 60.0 --x4 45.0 --x5 16.5 --x6 18.0 --x7 32.0 --x8 21.0 --x9 0.955 --actual_y 725.50
+python3 predict_custom.py \
+  --x1 25.0 --x2 1.015 --x3 60.0 --x4 45.0 --x5 16.5 \
+  --x6 18.0 --x7 32.0 --x8 21.0 --x9 0.955 --actual_y 725.50
 ```
 
-#### 2. Batch Testing CSV
+**2. CSV Batch Testing:**
 ```bash
+cd benchmark_100_samples
 python3 predict_custom.py --csv data/sample_custom_inputs.csv --output data/predictions_output.csv
 ```
 
-#### 3. Excel / Google Sheets Formula
-In cell `J2` (where `A2:I2` are $X_1 \dots X_9$):
+**3. Direct Python Code:**
+```python
+def predict_power(x1, x2, x3, x4, x5, x6, x7, x8, x9):
+    return (
+        419.8034 - 1.8575*x1 + 42.2294*x2 - 0.1166*x3 - 0.3831*x4
+        + 4.2214*x5 + 6.1404*x6 + 2.7977*x7 - 1.4406*x8 + 87.9806*x9
+    )
+print(predict_power(25.0, 1.015, 60.0, 45.0, 16.5, 18.0, 32.0, 21.0, 0.955))
+```
+
+**4. Excel / Google Sheets Formula:**
+In cell `J2` (where `A2:I2` are inputs $X_1 \dots X_9$):
 ```excel
 = 419.8034 - (1.8575*A2) + (42.2294*B2) - (0.1166*C2) - (0.3831*D2) + (4.2214*E2) + (6.1404*F2) + (2.7977*G2) - (1.4406*H2) + (87.9806*I2)
 ```
@@ -98,7 +127,7 @@ In cell `J2` (where `A2:I2` are $X_1 \dots X_9$):
 ```
 ml-rf-xgboost-model/
 ├── README.md                              # Main overview linking all 3 modules
-├── requirements.txt                       # Python dependencies
+├── requirements.txt                       # Shared dependencies
 ├── run_pipeline.sh                        # Module 1 root runner
 ├── predict.py                             # Module 1 churn inference CLI
 ├── data/                                  # Module 1 Churn data (260 entries)

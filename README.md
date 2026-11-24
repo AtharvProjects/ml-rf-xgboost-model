@@ -15,12 +15,13 @@ An end-to-end Machine Learning repository featuring production-ready implementat
 |---|---|---|---|:---:|
 | **[Customer Churn Prediction](./)** *(Root)* | **Binary Classification** | Random Forest vs. XGBoost | Customer Financial & Churn Data | 260 Entries |
 | **[Property Valuation Benchmark](./rf_ann_linear_regression/)** | **Continuous Regression** | Linear Regression vs. Random Forest vs. ANN | Real Estate & Valuation Data | 250 Entries |
+| **[100-Entry Benchmark & Formula Derivation](./benchmark_100_samples/)** | **9-Input Regression** | Linear Reg, Ridge, GBM, RF, ANN (70/30 split) | Power Plant Net Output Optimization | 100 Entries |
 
 ---
 
-## 📂 Module 1: Customer Churn (Random Forest vs. XGBoost)
+## 📂 Module 1: Customer Churn Classification (Random Forest vs. XGBoost)
 
-This project demonstrates a production-style machine learning workflow for predicting customer churn risk based on account demographics, activity levels, credit ratings, and product engagement.
+This module demonstrates a production-style machine learning workflow for predicting customer churn risk based on account demographics, activity levels, credit ratings, and product engagement.
 
 ### 🌟 Key Features
 - **100+ Realistic Data Entries**: 260 customer records with realistic financial distributions, correlated churn risks, and diverse feature dimensions.
@@ -37,7 +38,7 @@ This project demonstrates a production-style machine learning workflow for predi
 
 ---
 
-## 📂 Module 2: Property Valuation (Linear Regression, Random Forest, ANN)
+## 📂 Module 2: Property Valuation Continuous Regression (LR vs. RF vs. ANN)
 
 Located in [`rf_ann_linear_regression/`](./rf_ann_linear_regression/):
 - **Models**: Linear Regression (OLS), Random Forest Regressor, and Artificial Neural Network (MLP: 128-64-32).
@@ -48,150 +49,92 @@ Located in [`rf_ann_linear_regression/`](./rf_ann_linear_regression/):
 
 ---
 
-## 📊 Dataset Overview
+## 📂 Module 3: 100-Entry Benchmark, Formula Derivation & Custom Testing
 
-The dataset contains **260 customer profiles** with the following features:
+Located in [`benchmark_100_samples/`](./benchmark_100_samples/):
 
-| Feature Name | Type | Description |
-|---|---|---|
-| `credit_score` | Integer | Credit rating score (350 - 850) |
-| `age` | Integer | Customer age (18 - 70) |
-| `tenure` | Integer | Number of years as a customer (0 - 10) |
-| `balance` | Float | Account balance in USD |
-| `num_products` | Integer | Number of bank/platform products utilized (1 - 4) |
-| `has_credit_card` | Binary | Whether the customer holds an active credit card (0/1) |
-| `is_active_member` | Binary | Customer engagement activity status (0/1) |
-| `estimated_salary` | Float | Estimated annual salary in USD |
-| `satisfaction_score` | Integer | Customer satisfaction rating (1 - 5) |
-| **`churn`** *(Target)* | Binary | Whether customer churned (1) or remained (0) |
+### 📌 Problem Formulation
+- **Dataset**: Exactly 100 data entries with **10 parameters** per entry (9 inputs $X_1 \dots X_9$, 1 output $Y$).
+- **Partitioning**: Exact **70 entries for training** and **30 entries for validation**.
+- **Model Comparison**: 5 diverse algorithms trained under the identical strategy.
+
+### 📊 Benchmark Results (30 Validation Entries)
+
+| Rank | Model Architecture | $R^2$ Score (Closest to 1.0) | RMSE (MW) | MAE (MW) | MSE |
+|:---:|---|:---:|:---:|:---:|:---:|
+| 🥇 | **Multiple Linear Regression (OLS)** | **0.999695** 🏆 | **0.8041** | **0.6589** | **0.6466** |
+| 🥈 | **Ridge Regression ($L_2$)** | **0.998560** | 1.7467 | 1.3719 | 3.0509 |
+| 🥉 | **Gradient Boosting Regressor** | **0.828397** | 19.0707 | 16.8452 | 363.6904 |
+| 4 | **Random Forest Regressor** | **0.754297** | 22.8196 | 19.2857 | 520.7358 |
+| 5 | **Artificial Neural Network (MLP)** | **-5.097646** | 113.6800 | 98.7559 | 12,923.15 |
+
+### 📐 Derived Closed-Form Mathematical Formula (Best Model: OLS)
+
+$$\boxed{\hat{Y} = 419.8034 - 1.8575 X_1 + 42.2294 X_2 - 0.1166 X_3 - 0.3831 X_4 + 4.2214 X_5 + 6.1404 X_6 + 2.7977 X_7 - 1.4406 X_8 + 87.9806 X_9}$$
+
+### 🧪 Testing Custom Data Entries
+
+#### 1. Single Custom Entry CLI
+```bash
+cd benchmark_100_samples
+python3 predict_custom.py --x1 25.0 --x2 1.015 --x3 60.0 --x4 45.0 --x5 16.5 --x6 18.0 --x7 32.0 --x8 21.0 --x9 0.955 --actual_y 725.50
+```
+
+#### 2. Batch Testing CSV
+```bash
+python3 predict_custom.py --csv data/sample_custom_inputs.csv --output data/predictions_output.csv
+```
+
+#### 3. Excel / Google Sheets Formula
+In cell `J2` (where `A2:I2` are $X_1 \dots X_9$):
+```excel
+= 419.8034 - (1.8575*A2) + (42.2294*B2) - (0.1166*C2) - (0.3831*D2) + (4.2214*E2) + (6.1404*F2) + (2.7977*G2) - (1.4406*H2) + (87.9806*I2)
+```
 
 ---
 
-## 🏗️ Project Architecture
+## 🏗️ Complete Repository Tree
 
 ```
 ml-rf-xgboost-model/
-├── data/
-│   ├── generate_data.py            # Generates reproducible dataset
-│   └── customer_churn_data.csv     # 260 customer records (CSV)
-├── models/
-│   ├── random_forest_model.joblib  # Serialized Random Forest model
-│   ├── xgboost_model.joblib        # Serialized XGBoost model
-│   └── scaler.joblib               # StandardScaler transformation model
-├── plots/
-│   ├── confusion_matrices.png      # Side-by-side confusion matrix heatmaps
-│   ├── roc_curve_comparison.png    # ROC curves for RF vs XGBoost
-│   └── feature_importance_comparison.png # Relative feature importance chart
-├── src/
-│   ├── __init__.py
-│   ├── preprocess.py               # Data loading, train-test splitting, scaling
-│   ├── train.py                    # Model training & serialization
-│   └── evaluate.py                 # Performance evaluation & plot generation
-├── predict.py                      # Interactive CLI inference script
-├── run_pipeline.sh                 # One-click execution shell script
-├── metrics.json                    # Benchmark metrics output
-├── requirements.txt                # Python dependencies
-├── .gitignore                      # Git ignore rules
-└── README.md                       # Project documentation
+├── README.md                              # Main overview linking all 3 modules
+├── requirements.txt                       # Python dependencies
+├── run_pipeline.sh                        # Module 1 root runner
+├── predict.py                             # Module 1 churn inference CLI
+├── data/                                  # Module 1 Churn data (260 entries)
+├── models/                                # Module 1 saved joblib models
+├── plots/                                 # Module 1 confusion matrix & ROC charts
+│
+├── rf_ann_linear_regression/              # Module 2: Property Valuation Regression
+│   ├── README.md                          # Dedicated Module 2 docs
+│   ├── run_pipeline.sh                    # One-click Module 2 runner
+│   ├── predict.py                         # Property valuation inference CLI
+│   ├── data/housing_prices_data.csv       # 250 property valuation records
+│   ├── models/                            # Trained LR, RF, and ANN models
+│   └── plots/                             # Parity, residual, and metric charts
+│
+└── benchmark_100_samples/                 # Module 3: 100-Entry Benchmark & Formula
+    ├── README.md                          # Dedicated Module 3 docs & all steps
+    ├── models_benchmark.py                # 70/30 split & 5-model evaluation
+    ├── predict_custom.py                  # Custom data testing engine (CLI & batch)
+    ├── data/dataset_100_entries.csv       # 100 entries with 10 parameters
+    ├── data/sample_custom_inputs.csv      # Batch test custom samples
+    └── plots/model_comparison_benchmark.png # R² & parity comparison charts
 ```
 
 ---
 
-## 🚀 Quickstart Guide
+## 🚀 Environment Setup
 
-### 1. Clone the Repository
 ```bash
 git clone https://github.com/AtharvProjects/ml-rf-xgboost-model.git
 cd ml-rf-xgboost-model
-```
-
-### 2. Set Up Virtual Environment & Dependencies
-```bash
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 3. Run Complete End-to-End Pipeline
-You can run the entire workflow (data generation, model training, evaluation, and test prediction) using:
-```bash
-./run_pipeline.sh
-```
-
-Or run individual components:
-```bash
-# 1. Generate data
-python data/generate_data.py
-
-# 2. Train models
-python src/train.py
-
-# 3. Evaluate and generate charts
-python src/evaluate.py
-```
-
----
-
-## 🔮 Running Predictions (Inference)
-
-Run inference for any custom customer profile with `predict.py`:
-
-```bash
-python predict.py \
-  --credit_score 620 \
-  --age 48 \
-  --tenure 2 \
-  --balance 92000 \
-  --num_products 1 \
-  --has_credit_card 1 \
-  --is_active_member 0 \
-  --estimated_salary 78000 \
-  --satisfaction_score 2
-```
-
-**Sample Output:**
-```
---- Input Customer Profile ---
-  credit_score        : 620
-  age                 : 48
-  tenure              : 2
-  balance             : 92000.0
-  num_products        : 1
-  has_credit_card     : 1
-  is_active_member    : 0
-  estimated_salary    : 78000.0
-  satisfaction_score  : 2
-
---- Model Predictions ---
-[Random Forest]
-  Prediction       : Churn (1)
-  Churn Probability: 84.6%
-
-[XGBoost]
-  Prediction       : Churn (1)
-  Churn Probability: 91.2%
-```
-
----
-
-## 📈 Model Performance & Results
-
-Evaluation conducted on a held-out test split (stratified 20%):
-
-| Metric | Random Forest | XGBoost |
-|---|---|---|
-| **Accuracy** | 86.54% | 82.69% |
-| **Precision** | 50.00% | 37.50% |
-| **Recall** | 71.43% | 42.86% |
-| **F1-Score** | 0.5882 | 0.4000 |
-| **ROC-AUC** | 0.7079 | 0.6921 |
-
-Visualizations generated during evaluation:
-- `plots/confusion_matrices.png`: Confusion matrices comparing true vs predicted positive/negative churn.
-- `plots/roc_curve_comparison.png`: Receiver Operating Characteristic (ROC) curves with AUC metrics.
-- `plots/feature_importance_comparison.png`: Relative feature contribution ranking for both algorithms.
-
 ---
 
 ## 📜 License
-This project is open-source and available under the [MIT License](LICENSE).
+This repository is open-source and released under the [MIT License](LICENSE).

@@ -1,0 +1,30 @@
+{
+    "linear_regression": {
+        "intercept": -38.131,
+        "coefficients": {
+            "fc_MPa": 0.5051,
+            "Lb_mm": 0.1368,
+            "Df_mm": -0.0434,
+            "Ef_GPa": 0.0852,
+            "ff_MPa": 0.0037,
+            "Wg_mm": 0.3473,
+            "Dg_mm": 0.4212,
+            "FRP_BT": 0.4296,
+            "FRP_ST": 0.5311
+        }
+    },
+    "nonlinear_power_law": {
+        "alpha": 0.01194,
+        "exponents": {
+            "fc_MPa": 0.4039,
+            "Lb_mm": 0.5929,
+            "Df_mm": 0.1709,
+            "Ef_GPa": 0.2006,
+            "ff_MPa": 0.2399,
+            "Wg_mm": 0.0657,
+            "Dg_mm": 0.0931,
+            "FRP_BT": 0.0236,
+            "FRP_ST": 0.0395
+        }
+    }
+}

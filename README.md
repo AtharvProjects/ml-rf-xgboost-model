@@ -16,6 +16,7 @@ An end-to-end Machine Learning repository featuring production-ready implementat
 | **[Customer Churn Prediction](./)** *(Root)* | **Binary Classification** | Random Forest vs. XGBoost | Customer Financial & Churn Data | 260 Entries |
 | **[Property Valuation Benchmark](./rf_ann_linear_regression/)** | **Continuous Regression** | Linear Regression vs. Random Forest vs. ANN | Real Estate & Valuation Data | 250 Entries |
 | **[100-Entry Benchmark & Formula Derivation](./benchmark_100_samples/)** | **9-Input Regression** | Linear Reg, Ridge, GBM, RF, ANN (70/30 split) | Power Plant Net Output Optimization | 100 Entries |
+| **[NSM FRP Bond Strength & Failure Mode](./nsm_frp_bond_strength/)** | **Regression + Multi-Class + GUI** | XGBoost, RF, GBT, DT, ANN, LR + 5 Design Codes | NSM FRP-to-Concrete Experimental DB | 416 Entries |
 
 ---
 
@@ -122,6 +123,17 @@ In cell `J2` (where `A2:I2` are inputs $X_1 \dots X_9$):
 
 ---
 
+## 📂 Module 4: NSM FRP Bond Strength & Failure Mode (Kumar et al., 2024 Replication)
+
+Located in [`nsm_frp_bond_strength/`](./nsm_frp_bond_strength/):
+- **Datasheet**: 416 NSM FRP-to-concrete pullout records with **9 input parameters** ($f'_c, L_b, D_f, E_f, f_f, W_g, D_g, FRP_{BT}, FRP_{ST}$) and **2 outputs** (Bond strength $P_u$ in kN & Failure Mode $F_N$ 1–16), split **70% Training (291) / 30% Testing (125)**.
+- **Models**: 6 ML models (`XGBoost`, `GBT`, `RF`, `ANN`, `DT`, `LR`) compared against 5 structural design guidelines & analytical equations (`ACI 440.2R-08`, `SA HB 305`, `ACI 440.1R-15`, `Zhang et al.`, `CSA-S806`).
+- **Best Performance (XGBoost)**: $R = \mathbf{0.9945}$, $R^2 = \mathbf{0.9891}$, $\text{RMSE} = \mathbf{2.41\text{ kN}}$, $\text{SI} = \mathbf{0.0578}$.
+- **Diagrams Generated**: Donut variable distributions (`Fig. 1–2`), 3-panel Scatter / Error Frequency / Performance Ratio diagnostics (`Fig. 4–13`), Radar comparisons (`Fig. 14`), Taylor plots (`Fig. 15`), Failure mode scatter (`Fig. 16`), TreeSHAP explainability (`Fig. 17`), Partial Dependence & ICE curves (`Fig. 18`), and NSM specimen schematic (`Fig. 19`).
+- **Interactive Web GUI & CLI**: Launch `streamlit run app.py` or test custom specimens via `python3 predict_custom.py`. See [nsm_frp_bond_strength/README.md](./nsm_frp_bond_strength/README.md) for complete tables and equations.
+
+---
+
 ## 🏗️ Complete Repository Tree
 
 ```
@@ -149,6 +161,15 @@ ml-rf-xgboost-model/
     ├── data/dataset_100_entries.csv       # 100 entries with 10 parameters
     ├── data/sample_custom_inputs.csv      # Batch test custom samples
     └── plots/model_comparison_benchmark.png # R² & parity comparison charts
+
+└── nsm_frp_bond_strength/                 # Module 4: Kumar et al. (2024) NSM FRP Study
+    ├── README.md                          # Complete metrics, formulas & diagram guide
+    ├── run_pipeline.sh                    # One-click runner for all steps & plots
+    ├── app.py                             # Streamlit Web GUI (Fig. 19 replica)
+    ├── predict_custom.py                  # Single & CSV batch CLI prediction tool
+    ├── data/nsm_frp_bond_dataset.csv      # 416 NSM FRP records (9 inputs, Pu & FN)
+    ├── models/                            # 6 ML models + scaler + derived formulas
+    └── plots/                             # Figs. 1, 2, 4-19 (SHAP, PDP, Taylor, Radar)
 ```
 
 ---

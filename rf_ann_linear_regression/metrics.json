@@ -1,0 +1,20 @@
+{
+    "Linear Regression": {
+        "r2_score": 0.9784,
+        "rmse": 22906.11,
+        "mae": 18616.35,
+        "mape_percent": 2.75
+    },
+    "Random Forest": {
+        "r2_score": 0.9147,
+        "rmse": 45457.78,
+        "mae": 35472.5,
+        "mape_percent": 5.17
+    },
+    "Artificial Neural Network (ANN)": {
+        "r2_score": 0.9823,
+        "rmse": 20713.07,
+        "mae": 16053.29,
+        "mape_percent": 2.46
+    }
+}

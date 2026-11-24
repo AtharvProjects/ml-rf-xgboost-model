@@ -1,15 +1,24 @@
-# 🚀 Customer Churn Prediction: Random Forest vs XGBoost
+# 🚀 Machine Learning Suite: Classification & Regression Benchmarks
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-v1.4+-orange.svg)](https://scikit-learn.org/)
 [![XGBoost](https://img.shields.io/badge/XGBoost-v2.0+-green.svg)](https://xgboost.readthedocs.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-An end-to-end Machine Learning pipeline comparing **Random Forest** and **XGBoost (Extreme Gradient Boosting)** on tabular customer financial & churn data with **100+ data records** (260 curated entries).
+An end-to-end Machine Learning repository featuring production-ready implementations of foundational classification and regression paradigms on curated datasets with **100+ data entries**.
 
 ---
 
-## 📌 Project Overview
+## 🗂️ Modules in this Repository
+
+| Module | Task Type | Models Implemented | Dataset | Records |
+|---|---|---|---|:---:|
+| **[Customer Churn Prediction](./)** *(Root)* | **Binary Classification** | Random Forest vs. XGBoost | Customer Financial & Churn Data | 260 Entries |
+| **[Property Valuation Benchmark](./rf_ann_linear_regression/)** | **Continuous Regression** | Linear Regression vs. Random Forest vs. ANN | Real Estate & Valuation Data | 250 Entries |
+
+---
+
+## 📂 Module 1: Customer Churn (Random Forest vs. XGBoost)
 
 This project demonstrates a production-style machine learning workflow for predicting customer churn risk based on account demographics, activity levels, credit ratings, and product engagement.
 
@@ -25,6 +34,17 @@ This project demonstrates a production-style machine learning workflow for predi
   - Cross-model performance comparison with publication-ready charts (`src/evaluate.py`)
   - CLI and programmatic inference engine (`predict.py`)
 - **Visual Analytics**: Confusion matrices, comparative ROC-AUC curves, and side-by-side feature importance rankings.
+
+---
+
+## 📂 Module 2: Property Valuation (Linear Regression, Random Forest, ANN)
+
+Located in [`rf_ann_linear_regression/`](./rf_ann_linear_regression/):
+- **Models**: Linear Regression (OLS), Random Forest Regressor, and Artificial Neural Network (MLP: 128-64-32).
+- **Data**: 250 curated property records (`rf_ann_linear_regression/data/housing_prices_data.csv`).
+- **Metrics**: $R^2$ Score (ANN: **0.9823**, LR: **0.9784**, RF: **0.9147**), RMSE, MAE, MAPE.
+- **Visuals**: Parity plots, residual distributions, metric comparisons, ANN loss curves, and feature importance.
+- See the dedicated [rf_ann_linear_regression README](./rf_ann_linear_regression/README.md) for detailed documentation.
 
 ---
 

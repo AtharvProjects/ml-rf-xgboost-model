@@ -122,10 +122,10 @@ def train_all_models():
     xgb_gs = GridSearchCV(
         XGBRegressor(random_state=42, objective="reg:squarederror", n_jobs=-1),
         param_grid={
-            "n_estimators": [120, 200],
+            "n_estimators": [150, 250, 350],
             "learning_rate": [0.05, 0.08],
-            "max_depth": [3, 4, 5],
-            "subsample": [0.85],
+            "max_depth": [3, 4, 5, 6],
+            "subsample": [0.85, 0.95],
             "colsample_bytree": [0.85, 1.0],
         },
         cv=5,

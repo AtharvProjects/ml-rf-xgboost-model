@@ -473,6 +473,46 @@ def generate_specimen_schematic(plots_dir: str):
     print(f"  ✓ Saved {os.path.basename(out)}")
 
 
+def plot_fig20_table_s3_study_breakdown(df: pd.DataFrame, study_metrics: list, plots_dir: str):
+    """Generates Fig. 20: Table S3 Per-Study Specimen Range & XGBoost Error Breakdown ([21]-[40])."""
+    if not study_metrics:
+        return
+    sm_df = pd.DataFrame(study_metrics)
+    labels = [f"{r} {s.split('(')[0].strip()}" for r, s in zip(sm_df["Ref_ID"], sm_df["Study"])]
+    y_pos = np.arange(len(sm_df))
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 7.5), sharey=True)
+
+    # Panel (a): Experimental Pu [min, max] range + Exp Mean vs XGB Pred Mean
+    for i, row in sm_df.iterrows():
+        ax1.plot([row["Exp_Pu_Min"], row["Exp_Pu_Max"]], [i, i], color="#90caf9", linewidth=6, alpha=0.8, solid_capstyle="round")
+    ax1.scatter(sm_df["Exp_Pu_Mean"], y_pos, color="#0d47a1", s=45, zorder=3, label="Experimental Mean Pu")
+    ax1.scatter(sm_df["XGB_Pred_Mean"], y_pos, color="#ff6d00", marker="x", s=55, linewidths=2, zorder=4, label="XGBoost Predicted Mean Pu")
+    ax1.set_yticks(y_pos)
+    ax1.set_yticklabels([f"{lbl} (n={n})" for lbl, n in zip(labels, sm_df["N_total"])], fontsize=8.5, fontweight="bold")
+    ax1.invert_yaxis()
+    ax1.set_xlabel(r"Pull-out Bond Strength $P_u$ (kN)", fontsize=10.5)
+    ax1.set_title("(a) Table S3 Experimental Pu Ranges & Mean Parity", fontsize=11, fontweight="bold")
+    ax1.legend(loc="lower right", fontsize=8.5)
+    ax1.grid(True, axis="x", linestyle="--", alpha=0.4)
+
+    # Panel (b): Per-Study XGBoost MAE (kN) & RMSE (kN)
+    bar_h = 0.36
+    ax2.barh(y_pos - bar_h / 2, sm_df["XGB_MAE"], height=bar_h, color="#00a86b", edgecolor="black", label="XGBoost MAE (kN)")
+    ax2.barh(y_pos + bar_h / 2, sm_df["XGB_RMSE"], height=bar_h, color="#5c6bc0", edgecolor="black", label="XGBoost RMSE (kN)")
+    ax2.set_xlabel("Error (kN)", fontsize=10.5)
+    ax2.set_title("(b) Per-Study XGBoost Prediction Error ([21]–[40])", fontsize=11, fontweight="bold")
+    ax2.legend(loc="lower right", fontsize=8.5)
+    ax2.grid(True, axis="x", linestyle="--", alpha=0.4)
+
+    plt.suptitle("Fig. 20: Table S3 Source Study Coverage & Per-Study XGBoost Accuracy ([21]–[40], N = 416)", fontsize=13.5, fontweight="bold", y=0.99)
+    plt.tight_layout(rect=[0, 0, 1, 0.96])
+    out = os.path.join(plots_dir, "fig20_table_s3_study_breakdown.png")
+    plt.savefig(out, dpi=300, bbox_inches="tight")
+    plt.close()
+    print(f"  ✓ Saved {os.path.basename(out)}")
+
+
 def generate_all_diagrams(summary: dict, splits: dict, ml_all_preds: dict, analytical_all_preds: dict, ml_fn_all_preds: dict):
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     models_dir = os.path.join(base_dir, "models")
@@ -497,4 +537,5 @@ def generate_all_diagrams(summary: dict, splits: dict, ml_all_preds: dict, analy
     plot_fig17_shap_analysis(xgb_model, df[FEATURE_COLUMNS], plots_dir)
     plot_fig18_pdp_plots(xgb_model, df[FEATURE_COLUMNS], plots_dir)
     generate_specimen_schematic(plots_dir)
+    plot_fig20_table_s3_study_breakdown(df, summary.get("table_s3_study_metrics", []), plots_dir)
     print("🎨 All diagrams successfully created!\n")

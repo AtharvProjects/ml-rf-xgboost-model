@@ -10,6 +10,8 @@ from typing import Tuple
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 
+from src.table_s3 import get_global_bounds, verify_dataset_global_bounds
+
 FEATURE_COLUMNS = [
     "fc_MPa",
     "Lb_mm",
@@ -51,6 +53,7 @@ def prepare_splits(test_size: float = 0.30, random_state: int = 42, save_scaler:
     y_pu = df[TARGET_PU]
     y_fn = df[TARGET_FN]
 
+    stratify_target = y_fn if y_fn.value_counts().min() >= 2 else None
     (
         X_train,
         X_test,
@@ -58,7 +61,9 @@ def prepare_splits(test_size: float = 0.30, random_state: int = 42, save_scaler:
         y_pu_test,
         y_fn_train,
         y_fn_test,
-    ) = train_test_split(X, y_pu, y_fn, test_size=test_size, random_state=random_state)
+    ) = train_test_split(
+        X, y_pu, y_fn, test_size=test_size, random_state=random_state, stratify=stratify_target
+    )
 
     scaler = MinMaxScaler(feature_range=(-1, 1))
     X_train_scaled = pd.DataFrame(
@@ -87,8 +92,22 @@ def prepare_splits(test_size: float = 0.30, random_state: int = 42, save_scaler:
     }
 
 
+def get_table_s3_bounds() -> dict:
+    """Return global [min, max] parameter bounds derived from Table S3 ([21]-[40])."""
+    return get_global_bounds()
+
+
+def validate_against_table_s3(df: pd.DataFrame = None) -> dict:
+    """Validate dataset bounds against Table S3 ([21]-[40]) global ranges."""
+    if df is None:
+        df = load_dataset()
+    return verify_dataset_global_bounds(df)
+
+
 if __name__ == "__main__":
     splits = prepare_splits()
+    audit = validate_against_table_s3(splits["df"])
     print(f"Total entries : {len(splits['df'])}")
     print(f"Training (70%): {len(splits['X_train'])}")
     print(f"Testing  (30%): {len(splits['X_test'])}")
+    print(f"Table S3 Global Bounds Match: {audit['all_within_bounds']} (exact extremes: {audit['exact_extremes_match']})")

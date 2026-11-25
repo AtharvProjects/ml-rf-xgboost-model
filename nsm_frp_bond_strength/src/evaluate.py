@@ -142,6 +142,43 @@ def evaluate_all():
         exact_acc = float(np.mean(fn_p == y_fn_all) * 100.0)
         fn_accuracies[name] = round(exact_acc, 2)
 
+    # -------------------------------------------------------------------------
+    # 5. Table S3 Per-Study Breakdown ([21]-[40])
+    # -------------------------------------------------------------------------
+    study_rows = []
+    if "Ref_ID" in df.columns:
+        xgb_all = ml_all_preds["XGB"]
+        xgb_fn = ml_fn_all_preds["XGB"]
+        test_idx_set = set(splits["X_test"].index.tolist())
+        df_eval = df[["Ref_ID", "Year", "Study", "Pu_kN", "FN"]].copy()
+        df_eval["XGB_Pu"] = xgb_all
+        df_eval["XGB_FN"] = xgb_fn
+        df_eval["is_test"] = df_eval.index.isin(test_idx_set)
+        df_eval["ref_num"] = df_eval["Ref_ID"].str.strip("[]").astype(int)
+
+        for _, grp in df_eval.sort_values("ref_num").groupby("ref_num", sort=True):
+            yt_s = grp["Pu_kN"].values
+            yp_s = grp["XGB_Pu"].values
+            m_s = compute_paper_metrics(yt_s, yp_s)
+            fn_acc_s = float(np.mean(grp["XGB_FN"].values == grp["FN"].values) * 100.0)
+            study_rows.append({
+                "Ref_ID": grp["Ref_ID"].iloc[0],
+                "Year": int(grp["Year"].iloc[0]),
+                "Study": grp["Study"].iloc[0],
+                "N_total": int(len(grp)),
+                "N_test": int(grp["is_test"].sum()),
+                "Exp_Pu_Min": round(float(yt_s.min()), 2),
+                "Exp_Pu_Max": round(float(yt_s.max()), 2),
+                "Exp_Pu_Mean": round(float(yt_s.mean()), 2),
+                "XGB_Pred_Mean": round(float(yp_s.mean()), 2),
+                "XGB_R": m_s["R"],
+                "XGB_R2": m_s["R2"],
+                "XGB_MAE": m_s["MAE"],
+                "XGB_RMSE": m_s["RMSE"],
+                "FN_Match_Pct": round(fn_acc_s, 2),
+            })
+        pd.DataFrame(study_rows).to_csv(os.path.join(base_dir, "table_s3_study_metrics.csv"), index=False)
+
     print("\n" + "=" * 95)
     print("🔍 FAILURE MODE (FN 1..16) EXACT CLASSIFICATION ALIGNMENT (All N=416)")
     for name, acc in fn_accuracies.items():
@@ -159,6 +196,7 @@ def evaluate_all():
         "table3_ml": table3_rows,
         "table4_analytical": table4_rows,
         "table5_diagnostics": table5_rows,
+        "table_s3_study_metrics": study_rows,
         "failure_mode_accuracy_pct": fn_accuracies,
         "empirical_power_law_test_metrics": m_power_te,
         "derived_formulas": formulas,

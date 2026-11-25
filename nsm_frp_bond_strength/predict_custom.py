@@ -16,6 +16,7 @@ import pandas as pd
 
 from src.preprocess import FEATURE_COLUMNS
 from src.analytical_models import ANALYTICAL_MODELS
+from src.table_s3 import match_record_to_studies
 from src.train import power_law_func
 from data.generate_data import FAILURE_DESCRIPTIONS, FRP_BAR_TYPES, FRP_SURFACE_TYPES
 
@@ -71,6 +72,15 @@ def predict_single(features: dict, actual_pu: float = None):
     for g_name, g_func in ANALYTICAL_MODELS.items():
         print(f"  {g_name:<15}: {float(g_func(df_in)[0]):>7.2f} kN")
 
+    # Table S3 Reference Provenance
+    s3_match = match_record_to_studies(features, columns=FEATURE_COLUMNS, top_k=2, strict_allowed=True)
+    if s3_match["exact_match_count"] > 0:
+        refs_str = ", ".join(f"{m['ref_id']} {m['short_citation']}" for m in s3_match["exact_matches"])
+        print(f"\n📚 Table S3 Envelope Match : {refs_str}")
+    else:
+        top = s3_match["closest_studies"][0]
+        print(f"\n📚 Closest Table S3 Study : {top['ref_id']} {top['short_citation']} (dist={top['normalized_distance']}, outside={top['out_of_bounds_params']})")
+
     if actual_pu is not None:
         xgb_pu = float(pu_models["XGB"].predict(df_in)[0])
         err = abs(actual_pu - xgb_pu)
@@ -93,13 +103,21 @@ def predict_batch(csv_path: str, output_path: str = None):
     fn_preds = fn_encoder.inverse_transform(fn_models["XGB"].predict(X_in))
     df["Pred_FN_XGB"] = fn_preds
     df["Pred_Failure_ID"] = [FAILURE_DESCRIPTIONS[int(f)][0] for f in fn_preds]
+    table_s3_refs = []
+    for rec in X_in.to_dict(orient="records"):
+        res = match_record_to_studies(rec, columns=FEATURE_COLUMNS, top_k=1, strict_allowed=True)
+        if res["exact_match_count"] > 0:
+            table_s3_refs.append(",".join(m["ref_id"] for m in res["exact_matches"]))
+        else:
+            table_s3_refs.append(f"~{res['closest_studies'][0]['ref_id']}")
+    df["Table_S3_Ref"] = table_s3_refs
 
     if "Pu_kN" in df.columns:
         df["XGB_Abs_Error_kN"] = np.round(np.abs(df["Pu_kN"] - df["Pred_Pu_XGB_kN"]), 2)
         print(f"Batch XGBoost MAE: {df['XGB_Abs_Error_kN'].mean():.2f} kN")
 
     print("\nBatch Prediction Preview:")
-    cols = ["fc_MPa", "Lb_mm", "Df_mm", "Pred_Pu_XGB_kN", "Pred_FN_XGB", "Pred_Failure_ID"]
+    cols = ["fc_MPa", "Lb_mm", "Df_mm", "Pred_Pu_XGB_kN", "Pred_FN_XGB", "Pred_Failure_ID", "Table_S3_Ref"]
     print(df[cols].to_string(index=False))
 
     if output_path:

@@ -1,0 +1,2134 @@
+{
+  "metadata": {
+    "source_paper": "Kumar, A., Arora, H. C., & Nehdi, M. L. (2024). XGBoost algorithm based estimation of near surface mounted FRP rod-to-concrete bond strength and failure mode. Journal of Building Engineering, 90, 109418.",
+    "table_title": "Table S3. Collected experimental dataset",
+    "study_count": 20,
+    "ref_range": "[21]–[40]",
+    "year_span": [
+      1999,
+      2023
+    ],
+    "total_specimens_in_paper": 416
+  },
+  "global_bounds": {
+    "fc_MPa": {
+      "min": 23.0,
+      "max": 66.25,
+      "min_refs": [
+        "[22]",
+        "[27]",
+        "[29]"
+      ],
+      "max_refs": [
+        "[37]"
+      ],
+      "dtype": "float",
+      "unit": "MPa",
+      "role": "input",
+      "description": "Compressive strength of concrete"
+    },
+    "Lb_mm": {
+      "min": 14.4,
+      "max": 457.2,
+      "min_refs": [
+        "[26]"
+      ],
+      "max_refs": [
+        "[30]"
+      ],
+      "dtype": "float",
+      "unit": "mm",
+      "role": "input",
+      "description": "Bonded length of FRP bar"
+    },
+    "Df_mm": {
+      "min": 5.0,
+      "max": 24.0,
+      "min_refs": [
+        "[40]"
+      ],
+      "max_refs": [
+        "[40]"
+      ],
+      "dtype": "float",
+      "unit": "mm",
+      "role": "input",
+      "description": "Diameter of FRP bar"
+    },
+    "Ef_GPa": {
+      "min": 37.17,
+      "max": 234.43,
+      "min_refs": [
+        "[24]"
+      ],
+      "max_refs": [
+        "[34]"
+      ],
+      "dtype": "float",
+      "unit": "GPa",
+      "role": "input",
+      "description": "Elastic modulus of FRP rod"
+    },
+    "ff_MPa": {
+      "min": 749.0,
+      "max": 4826.5,
+      "min_refs": [
+        "[30]"
+      ],
+      "max_refs": [
+        "[34]"
+      ],
+      "dtype": "float",
+      "unit": "MPa",
+      "role": "input",
+      "description": "Tensile strength of FRP rod"
+    },
+    "Wg_mm": {
+      "min": 6.0,
+      "max": 30.0,
+      "min_refs": [
+        "[26]"
+      ],
+      "max_refs": [
+        "[22]"
+      ],
+      "dtype": "float",
+      "unit": "mm",
+      "role": "input",
+      "description": "Width of the epoxy groove"
+    },
+    "Dg_mm": {
+      "min": 10.0,
+      "max": 40.0,
+      "min_refs": [
+        "[23]",
+        "[27]",
+        "[32]"
+      ],
+      "max_refs": [
+        "[25]"
+      ],
+      "dtype": "float",
+      "unit": "mm",
+      "role": "input",
+      "description": "Depth of the epoxy groove"
+    },
+    "FRP_BT": {
+      "min": 1,
+      "max": 3,
+      "min_refs": [
+        "[22]",
+        "[27]",
+        "[29]",
+        "[32]",
+        "[36]",
+        "[37]"
+      ],
+      "max_refs": [
+        "[21]",
+        "[22]",
+        "[23]",
+        "[24]",
+        "[26]",
+        "[27]",
+        "[28]",
+        "[30]",
+        "[32]",
+        "[33]",
+        "[37]",
+        "[38]",
+        "[39]"
+      ],
+      "dtype": "int",
+      "unit": "category (1-3)",
+      "role": "input",
+      "description": "FRP bar type (1: Basalt, 2: Carbon, 3: Glass)"
+    },
+    "FRP_ST": {
+      "min": 1,
+      "max": 7,
+      "min_refs": [
+        "[21]",
+        "[22]",
+        "[23]",
+        "[24]",
+        "[27]",
+        "[32]",
+        "[36]",
+        "[37]",
+        "[39]"
+      ],
+      "max_refs": [
+        "[21]",
+        "[25]",
+        "[26]",
+        "[27]",
+        "[31]",
+        "[35]",
+        "[38]",
+        "[40]"
+      ],
+      "dtype": "int",
+      "unit": "category (1-7)",
+      "role": "input",
+      "description": "Surface treatment of FRP bar (1-7)"
+    },
+    "Pu_kN": {
+      "min": 7.17,
+      "max": 127.52,
+      "min_refs": [
+        "[31]"
+      ],
+      "max_refs": [
+        "[34]"
+      ],
+      "dtype": "float",
+      "unit": "kN",
+      "role": "output",
+      "description": "Ultimate pull-out bond strength"
+    },
+    "FN": {
+      "min": 1,
+      "max": 16,
+      "min_refs": [
+        "[21]",
+        "[26]",
+        "[32]",
+        "[36]",
+        "[37]",
+        "[38]"
+      ],
+      "max_refs": [
+        "[39]"
+      ],
+      "dtype": "int",
+      "unit": "class (1-16)",
+      "role": "output",
+      "description": "Failure mode number (1-16)"
+    }
+  },
+  "studies": [
+    {
+      "ref_id": "[21]",
+      "ref_num": 21,
+      "year": 2013,
+      "short_citation": "Lee et al. (2013)",
+      "full_citation": "Lee, D., L. Cheng, and J. Y.-G. Hui. 2013. \"Bond Characteristics of Various NSM FRP Reinforcements in Concrete.\" Journal of Composites for Construction. 17(1): 117-129. https://doi.org/10.1061/(ASCE)CC.1943-5614.0000318",
+      "doi": "https://doi.org/10.1061/(ASCE)CC.1943-5614.0000318",
+      "notes": "",
+      "parameters": {
+        "fc_MPa": {
+          "raw": "28.5",
+          "min": 28.5,
+          "max": 28.5,
+          "is_constant": true
+        },
+        "Lb_mm": {
+          "raw": "250",
+          "min": 250.0,
+          "max": 250.0,
+          "is_constant": true
+        },
+        "Df_mm": {
+          "raw": "7.5-10",
+          "min": 7.5,
+          "max": 10.0,
+          "is_constant": false
+        },
+        "Ef_GPa": {
+          "raw": "41-155",
+          "min": 41.0,
+          "max": 155.0,
+          "is_constant": false
+        },
+        "ff_MPa": {
+          "raw": "760-2300",
+          "min": 760.0,
+          "max": 2300.0,
+          "is_constant": false
+        },
+        "Wg_mm": {
+          "raw": "11.25-25",
+          "min": 11.25,
+          "max": 25.0,
+          "is_constant": false
+        },
+        "Dg_mm": {
+          "raw": "11.25-25",
+          "min": 11.25,
+          "max": 25.0,
+          "is_constant": false
+        },
+        "FRP_BT": {
+          "raw": "2-3",
+          "min": 2,
+          "max": 3,
+          "is_constant": false,
+          "allowed_values": [
+            2,
+            3
+          ]
+        },
+        "FRP_ST": {
+          "raw": "1-7",
+          "min": 1,
+          "max": 7,
+          "is_constant": false,
+          "allowed_values": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "Pu_kN": {
+          "raw": "47.38-74.58",
+          "min": 47.38,
+          "max": 74.58,
+          "is_constant": false
+        },
+        "FN": {
+          "raw": "1-10",
+          "min": 1,
+          "max": 10,
+          "is_constant": false,
+          "allowed_values": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        }
+      }
+    },
+    {
+      "ref_id": "[22]",
+      "ref_num": 22,
+      "year": 2012,
+      "short_citation": "Ceroni et al. (2012)",
+      "full_citation": "Ceroni, F., M. Pecce, A. Bilotta, and E. Nigro. 2012. \"Bond behavior of FRP NSM systems in concrete elements.\" Composites Part B: Engineering. 43(2): 99-109. https://doi.org/10.1016/j.compositesb.2011.10.017",
+      "doi": "https://doi.org/10.1016/j.compositesb.2011.10.017",
+      "notes": "",
+      "parameters": {
+        "fc_MPa": {
+          "raw": "23",
+          "min": 23.0,
+          "max": 23.0,
+          "is_constant": true
+        },
+        "Lb_mm": {
+          "raw": "300",
+          "min": 300.0,
+          "max": 300.0,
+          "is_constant": true
+        },
+        "Df_mm": {
+          "raw": "6-8",
+          "min": 6.0,
+          "max": 8.0,
+          "is_constant": false
+        },
+        "Ef_GPa": {
+          "raw": "46-155",
+          "min": 46.0,
+          "max": 155.0,
+          "is_constant": false
+        },
+        "ff_MPa": {
+          "raw": "1272-2495",
+          "min": 1272.0,
+          "max": 2495.0,
+          "is_constant": false
+        },
+        "Wg_mm": {
+          "raw": "30",
+          "min": 30.0,
+          "max": 30.0,
+          "is_constant": true
+        },
+        "Dg_mm": {
+          "raw": "30",
+          "min": 30.0,
+          "max": 30.0,
+          "is_constant": true
+        },
+        "FRP_BT": {
+          "raw": "1-3",
+          "min": 1,
+          "max": 3,
+          "is_constant": false,
+          "allowed_values": [
+            1,
+            2,
+            3
+          ]
+        },
+        "FRP_ST": {
+          "raw": "1-5",
+          "min": 1,
+          "max": 5,
+          "is_constant": false,
+          "allowed_values": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        "Pu_kN": {
+          "raw": "28.80-50.90",
+          "min": 28.8,
+          "max": 50.9,
+          "is_constant": false
+        },
+        "FN": {
+          "raw": "11-12",
+          "min": 11,
+          "max": 12,
+          "is_constant": false,
+          "allowed_values": [
+            11,
+            12
+          ]
+        }
+      }
+    },
+    {
+      "ref_id": "[23]",
+      "ref_num": 23,
+      "year": 2002,
+      "short_citation": "De Lorenzis et al. (2002)",
+      "full_citation": "De Lorenzis, L., A. Rizzo, and A. La Tegola. 2002. \"A modified pull-out test for bond of near-surface mounted FRP rods in concrete.\" Composites Part B: Engineering. 33(8): 589-603. https://doi.org/10.1016/S1359-8368(02)00052-5",
+      "doi": "https://doi.org/10.1016/S1359-8368(02)00052-5",
+      "notes": "",
+      "parameters": {
+        "fc_MPa": {
+          "raw": "27.5",
+          "min": 27.5,
+          "max": 27.5,
+          "is_constant": true
+        },
+        "Lb_mm": {
+          "raw": "32-192",
+          "min": 32.0,
+          "max": 192.0,
+          "is_constant": false
+        },
+        "Df_mm": {
+          "raw": "8-11.3",
+          "min": 8.0,
+          "max": 11.3,
+          "is_constant": false
+        },
+        "Ef_GPa": {
+          "raw": "37.7-174.71",
+          "min": 37.7,
+          "max": 174.71,
+          "is_constant": false
+        },
+        "ff_MPa": {
+          "raw": "873-2214",
+          "min": 873.0,
+          "max": 2214.0,
+          "is_constant": false
+        },
+        "Wg_mm": {
+          "raw": "10-24",
+          "min": 10.0,
+          "max": 24.0,
+          "is_constant": false
+        },
+        "Dg_mm": {
+          "raw": "10-24",
+          "min": 10.0,
+          "max": 24.0,
+          "is_constant": false
+        },
+        "FRP_BT": {
+          "raw": "2-3",
+          "min": 2,
+          "max": 3,
+          "is_constant": false,
+          "allowed_values": [
+            2,
+            3
+          ]
+        },
+        "FRP_ST": {
+          "raw": "1-6",
+          "min": 1,
+          "max": 6,
+          "is_constant": false,
+          "allowed_values": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        "Pu_kN": {
+          "raw": "9.46-58.62",
+          "min": 9.46,
+          "max": 58.62,
+          "is_constant": false
+        },
+        "FN": {
+          "raw": "11-12",
+          "min": 11,
+          "max": 12,
+          "is_constant": false,
+          "allowed_values": [
+            11,
+            12
+          ]
+        }
+      }
+    },
+    {
+      "ref_id": "[24]",
+      "ref_num": 24,
+      "year": 2004,
+      "short_citation": "De Lorenzis et al. (2004)",
+      "full_citation": "De Lorenzis, L., K. Lundgren, and R. Andrea. 2004. \"Anchorage Length of Near-Surface Mounted Fiber-Reinforced Polymer Bars for Concrete Strengthening—Experimental Investigation and Numerical Modeling.\" ACI Structural Journal. 101(2): 269–278.",
+      "doi": "",
+      "notes": "",
+      "parameters": {
+        "fc_MPa": {
+          "raw": "27.5",
+          "min": 27.5,
+          "max": 27.5,
+          "is_constant": true
+        },
+        "Lb_mm": {
+          "raw": "32-271.2",
+          "min": 32.0,
+          "max": 271.2,
+          "is_constant": false
+        },
+        "Df_mm": {
+          "raw": "8-11.3",
+          "min": 8.0,
+          "max": 11.3,
+          "is_constant": false
+        },
+        "Ef_GPa": {
+          "raw": "37.17-174.71",
+          "min": 37.17,
+          "max": 174.71,
+          "is_constant": false
+        },
+        "ff_MPa": {
+          "raw": "873-2214",
+          "min": 873.0,
+          "max": 2214.0,
+          "is_constant": false
+        },
+        "Wg_mm": {
+          "raw": "12-24",
+          "min": 12.0,
+          "max": 24.0,
+          "is_constant": false
+        },
+        "Dg_mm": {
+          "raw": "12-24",
+          "min": 12.0,
+          "max": 24.0,
+          "is_constant": false
+        },
+        "FRP_BT": {
+          "raw": "2-3",
+          "min": 2,
+          "max": 3,
+          "is_constant": false,
+          "allowed_values": [
+            2,
+            3
+          ]
+        },
+        "FRP_ST": {
+          "raw": "1-6",
+          "min": 1,
+          "max": 6,
+          "is_constant": false,
+          "allowed_values": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        "Pu_kN": {
+          "raw": "10.67-67.43",
+          "min": 10.67,
+          "max": 67.43,
+          "is_constant": false
+        },
+        "FN": {
+          "raw": "11-13",
+          "min": 11,
+          "max": 13,
+          "is_constant": false,
+          "allowed_values": [
+            11,
+            12,
+            13
+          ]
+        }
+      }
+    },
+    {
+      "ref_id": "[25]",
+      "ref_num": 25,
+      "year": 2008,
+      "short_citation": "Novidis & Pantazopoulou (2008)",
+      "full_citation": "Novidis, D. G., and S. J. Pantazopoulou. 2008. \"Bond Tests of Short NSM-FRP and Steel Bar Anchorages.\" Journal of Composites for Construction. 12(3): 323-333. https://doi.org/10.1061/(ASCE)1090-0268(2008)12:3(323)",
+      "doi": "https://doi.org/10.1061/(ASCE)1090-0268(2008)12:3(323)",
+      "notes": "",
+      "parameters": {
+        "fc_MPa": {
+          "raw": "34",
+          "min": 34.0,
+          "max": 34.0,
+          "is_constant": true
+        },
+        "Lb_mm": {
+          "raw": "36-60",
+          "min": 36.0,
+          "max": 60.0,
+          "is_constant": false
+        },
+        "Df_mm": {
+          "raw": "12",
+          "min": 12.0,
+          "max": 12.0,
+          "is_constant": true
+        },
+        "Ef_GPa": {
+          "raw": "124",
+          "min": 124.0,
+          "max": 124.0,
+          "is_constant": true
+        },
+        "ff_MPa": {
+          "raw": "2068",
+          "min": 2068.0,
+          "max": 2068.0,
+          "is_constant": true
+        },
+        "Wg_mm": {
+          "raw": "20",
+          "min": 20.0,
+          "max": 20.0,
+          "is_constant": true
+        },
+        "Dg_mm": {
+          "raw": "20-40",
+          "min": 20.0,
+          "max": 40.0,
+          "is_constant": false
+        },
+        "FRP_BT": {
+          "raw": "2",
+          "min": 2,
+          "max": 2,
+          "is_constant": true,
+          "allowed_values": [
+            2
+          ]
+        },
+        "FRP_ST": {
+          "raw": "7",
+          "min": 7,
+          "max": 7,
+          "is_constant": true,
+          "allowed_values": [
+            7
+          ]
+        },
+        "Pu_kN": {
+          "raw": "10.3-20.2",
+          "min": 10.3,
+          "max": 20.2,
+          "is_constant": false
+        },
+        "FN": {
+          "raw": "11",
+          "min": 11,
+          "max": 11,
+          "is_constant": true,
+          "allowed_values": [
+            11
+          ]
+        }
+      }
+    },
+    {
+      "ref_id": "[26]",
+      "ref_num": 26,
+      "year": 2013,
+      "short_citation": "Kalupahana et al. (2013)",
+      "full_citation": "Kalupahana, W. K. K. G., T. J. Ibell, and A. P. Darby. 2013. \"Bond characteristics of near surface mounted CFRP bars.\" Construction and Building Materials. 43: 58-68. https://doi.org/10.1016/j.conbuildmat.2013.01.021",
+      "doi": "https://doi.org/10.1016/j.conbuildmat.2013.01.021",
+      "notes": "",
+      "parameters": {
+        "fc_MPa": {
+          "raw": "30-60",
+          "min": 30.0,
+          "max": 60.0,
+          "is_constant": false
+        },
+        "Lb_mm": {
+          "raw": "14.4-152.4",
+          "min": 14.4,
+          "max": 152.4,
+          "is_constant": false
+        },
+        "Df_mm": {
+          "raw": "9-12",
+          "min": 9.0,
+          "max": 12.0,
+          "is_constant": false
+        },
+        "Ef_GPa": {
+          "raw": "120-141",
+          "min": 120.0,
+          "max": 141.0,
+          "is_constant": false
+        },
+        "ff_MPa": {
+          "raw": "2040-2720",
+          "min": 2040.0,
+          "max": 2720.0,
+          "is_constant": false
+        },
+        "Wg_mm": {
+          "raw": "6-18",
+          "min": 6.0,
+          "max": 18.0,
+          "is_constant": false
+        },
+        "Dg_mm": {
+          "raw": "13-24",
+          "min": 13.0,
+          "max": 24.0,
+          "is_constant": false
+        },
+        "FRP_BT": {
+          "raw": "2-3",
+          "min": 2,
+          "max": 3,
+          "is_constant": false,
+          "allowed_values": [
+            2,
+            3
+          ]
+        },
+        "FRP_ST": {
+          "raw": "4-7",
+          "min": 4,
+          "max": 7,
+          "is_constant": false,
+          "allowed_values": [
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "Pu_kN": {
+          "raw": "19.10-94.20",
+          "min": 19.1,
+          "max": 94.2,
+          "is_constant": false
+        },
+        "FN": {
+          "raw": "1-15",
+          "min": 1,
+          "max": 15,
+          "is_constant": false,
+          "allowed_values": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ]
+        }
+      }
+    },
+    {
+      "ref_id": "[27]",
+      "ref_num": 27,
+      "year": 2011,
+      "short_citation": "Bilotta et al. (2011)",
+      "full_citation": "Bilotta, A., F. Ceroni, M. D. Ludovico, E. Nigro, M. Pecce, and G. Manfredi. 2011. \"Bond Efficiency of EBR and NSM FRP Systems for Strengthening Concrete Members.\" Journal of Composites for Construction. 15(5): 757-772. https://doi.org/10.1061/(ASCE)CC.1943-5614.0000204",
+      "doi": "https://doi.org/10.1061/(ASCE)CC.1943-5614.0000204",
+      "notes": "",
+      "parameters": {
+        "fc_MPa": {
+          "raw": "23",
+          "min": 23.0,
+          "max": 23.0,
+          "is_constant": true
+        },
+        "Lb_mm": {
+          "raw": "300",
+          "min": 300.0,
+          "max": 300.0,
+          "is_constant": true
+        },
+        "Df_mm": {
+          "raw": "6-10",
+          "min": 6.0,
+          "max": 10.0,
+          "is_constant": false
+        },
+        "Ef_GPa": {
+          "raw": "46-155",
+          "min": 46.0,
+          "max": 155.0,
+          "is_constant": false
+        },
+        "ff_MPa": {
+          "raw": "1250-2495",
+          "min": 1250.0,
+          "max": 2495.0,
+          "is_constant": false
+        },
+        "Wg_mm": {
+          "raw": "10-15",
+          "min": 10.0,
+          "max": 15.0,
+          "is_constant": false
+        },
+        "Dg_mm": {
+          "raw": "10-15",
+          "min": 10.0,
+          "max": 15.0,
+          "is_constant": false
+        },
+        "FRP_BT": {
+          "raw": "1-3",
+          "min": 1,
+          "max": 3,
+          "is_constant": false,
+          "allowed_values": [
+            1,
+            2,
+            3
+          ]
+        },
+        "FRP_ST": {
+          "raw": "1-7",
+          "min": 1,
+          "max": 7,
+          "is_constant": false,
+          "allowed_values": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "Pu_kN": {
+          "raw": "28.84-55.30",
+          "min": 28.84,
+          "max": 55.3,
+          "is_constant": false
+        },
+        "FN": {
+          "raw": "7-12",
+          "min": 7,
+          "max": 12,
+          "is_constant": false,
+          "allowed_values": [
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ]
+        }
+      }
+    },
+    {
+      "ref_id": "[28]",
+      "ref_num": 28,
+      "year": 2013,
+      "short_citation": "Sharaky et al. (2013)",
+      "full_citation": "Sharaky, I. A., L. Torres, M. Baena, and C. Miàs. 2013. \"An experimental study of different factors affecting the bond of NSM FRP bars in concrete.\" Composite Structures. 99: 350-365. https://doi.org/10.1016/j.compstruct.2012.12.014",
+      "doi": "https://doi.org/10.1016/j.compstruct.2012.12.014",
+      "notes": "",
+      "parameters": {
+        "fc_MPa": {
+          "raw": "25",
+          "min": 25.0,
+          "max": 25.0,
+          "is_constant": true
+        },
+        "Lb_mm": {
+          "raw": "192",
+          "min": 192.0,
+          "max": 192.0,
+          "is_constant": true
+        },
+        "Df_mm": {
+          "raw": "8-12",
+          "min": 8.0,
+          "max": 12.0,
+          "is_constant": false
+        },
+        "Ef_GPa": {
+          "raw": "64-170",
+          "min": 64.0,
+          "max": 170.0,
+          "is_constant": false
+        },
+        "ff_MPa": {
+          "raw": "1350-2350",
+          "min": 1350.0,
+          "max": 2350.0,
+          "is_constant": false
+        },
+        "Wg_mm": {
+          "raw": "12-20",
+          "min": 12.0,
+          "max": 20.0,
+          "is_constant": false
+        },
+        "Dg_mm": {
+          "raw": "16-19.4",
+          "min": 16.0,
+          "max": 19.4,
+          "is_constant": false
+        },
+        "FRP_BT": {
+          "raw": "2-3",
+          "min": 2,
+          "max": 3,
+          "is_constant": false,
+          "allowed_values": [
+            2,
+            3
+          ]
+        },
+        "FRP_ST": {
+          "raw": "2-4",
+          "min": 2,
+          "max": 4,
+          "is_constant": false,
+          "allowed_values": [
+            2,
+            3,
+            4
+          ]
+        },
+        "Pu_kN": {
+          "raw": "31.43-59.97",
+          "min": 31.43,
+          "max": 59.97,
+          "is_constant": false
+        },
+        "FN": {
+          "raw": "2-14",
+          "min": 2,
+          "max": 14,
+          "is_constant": false,
+          "allowed_values": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ]
+        }
+      }
+    },
+    {
+      "ref_id": "[29]",
+      "ref_num": 29,
+      "year": 2014,
+      "short_citation": "Bilotta et al. (2014)",
+      "full_citation": "Bilotta, A., F. Ceroni, E. Nigro, and M. Pecce. 2014. \"Strain assessment for the design of NSM FRP systems for the strengthening of RC members.\" Construction and Building Materials. 69: 143-158. https://doi.org/10.1016/j.conbuildmat.2014.07.024",
+      "doi": "https://doi.org/10.1016/j.conbuildmat.2014.07.024",
+      "notes": "",
+      "parameters": {
+        "fc_MPa": {
+          "raw": "23",
+          "min": 23.0,
+          "max": 23.0,
+          "is_constant": true
+        },
+        "Lb_mm": {
+          "raw": "300",
+          "min": 300.0,
+          "max": 300.0,
+          "is_constant": true
+        },
+        "Df_mm": {
+          "raw": "8-10",
+          "min": 8.0,
+          "max": 10.0,
+          "is_constant": false
+        },
+        "Ef_GPa": {
+          "raw": "42-100",
+          "min": 42.0,
+          "max": 100.0,
+          "is_constant": false
+        },
+        "ff_MPa": {
+          "raw": "1040-1272",
+          "min": 1040.0,
+          "max": 1272.0,
+          "is_constant": false
+        },
+        "Wg_mm": {
+          "raw": "14-20",
+          "min": 14.0,
+          "max": 20.0,
+          "is_constant": false
+        },
+        "Dg_mm": {
+          "raw": "14-20",
+          "min": 14.0,
+          "max": 20.0,
+          "is_constant": false
+        },
+        "FRP_BT": {
+          "raw": "1-2",
+          "min": 1,
+          "max": 2,
+          "is_constant": false,
+          "allowed_values": [
+            1,
+            2
+          ]
+        },
+        "FRP_ST": {
+          "raw": "5-6",
+          "min": 5,
+          "max": 6,
+          "is_constant": false,
+          "allowed_values": [
+            5,
+            6
+          ]
+        },
+        "Pu_kN": {
+          "raw": "38.02-48.22",
+          "min": 38.02,
+          "max": 48.22,
+          "is_constant": false
+        },
+        "FN": {
+          "raw": "11",
+          "min": 11,
+          "max": 11,
+          "is_constant": true,
+          "allowed_values": [
+            11
+          ]
+        }
+      }
+    },
+    {
+      "ref_id": "[30]",
+      "ref_num": 30,
+      "year": 2011,
+      "short_citation": "Soliman et al. (2011)",
+      "full_citation": "Soliman, S. M., E. El-Salakawy, and B. Benmokrane. 2011. \"Bond Performance of Near-Surface-Mounted FRP Bars.\" Journal of Composites for Construction. 15(1): 103-111. https://doi.org/10.1061/(ASCE)CC.1943-5614.0000150",
+      "doi": "https://doi.org/10.1061/(ASCE)CC.1943-5614.0000150",
+      "notes": "",
+      "parameters": {
+        "fc_MPa": {
+          "raw": "49.37",
+          "min": 49.37,
+          "max": 49.37,
+          "is_constant": true
+        },
+        "Lb_mm": {
+          "raw": "57-457.2",
+          "min": 57.0,
+          "max": 457.2,
+          "is_constant": false
+        },
+        "Df_mm": {
+          "raw": "9.5-12.7",
+          "min": 9.5,
+          "max": 12.7,
+          "is_constant": false
+        },
+        "Ef_GPa": {
+          "raw": "42-134",
+          "min": 42.0,
+          "max": 134.0,
+          "is_constant": false
+        },
+        "ff_MPa": {
+          "raw": "749-1540",
+          "min": 749.0,
+          "max": 1540.0,
+          "is_constant": false
+        },
+        "Wg_mm": {
+          "raw": "14.25-25.4",
+          "min": 14.25,
+          "max": 25.4,
+          "is_constant": false
+        },
+        "Dg_mm": {
+          "raw": "14.25-25.4",
+          "min": 14.25,
+          "max": 25.4,
+          "is_constant": false
+        },
+        "FRP_BT": {
+          "raw": "2-3",
+          "min": 2,
+          "max": 3,
+          "is_constant": false,
+          "allowed_values": [
+            2,
+            3
+          ]
+        },
+        "FRP_ST": {
+          "raw": "4",
+          "min": 4,
+          "max": 4,
+          "is_constant": true,
+          "allowed_values": [
+            4
+          ]
+        },
+        "Pu_kN": {
+          "raw": "35.56-96.23",
+          "min": 35.56,
+          "max": 96.23,
+          "is_constant": false
+        },
+        "FN": {
+          "raw": "3-13",
+          "min": 3,
+          "max": 13,
+          "is_constant": false,
+          "allowed_values": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+          ]
+        }
+      }
+    },
+    {
+      "ref_id": "[31]",
+      "ref_num": 31,
+      "year": 2007,
+      "short_citation": "Novidis et al. (2007)",
+      "full_citation": "Novidis, D., S. J. Pantazopoulou, and E. Tentolouris. 2007. \"Experimental study of bond of NSM-FRP reinforcement.\" Construction and Building Materials. 21(8): 1760-1770. https://doi.org/10.1016/j.conbuildmat.2006.05.054",
+      "doi": "https://doi.org/10.1016/j.conbuildmat.2006.05.054",
+      "notes": "",
+      "parameters": {
+        "fc_MPa": {
+          "raw": "34.5",
+          "min": 34.5,
+          "max": 34.5,
+          "is_constant": true
+        },
+        "Lb_mm": {
+          "raw": "36-120",
+          "min": 36.0,
+          "max": 120.0,
+          "is_constant": false
+        },
+        "Df_mm": {
+          "raw": "12",
+          "min": 12.0,
+          "max": 12.0,
+          "is_constant": true
+        },
+        "Ef_GPa": {
+          "raw": "124",
+          "min": 124.0,
+          "max": 124.0,
+          "is_constant": true
+        },
+        "ff_MPa": {
+          "raw": "2068",
+          "min": 2068.0,
+          "max": 2068.0,
+          "is_constant": true
+        },
+        "Wg_mm": {
+          "raw": "20-25",
+          "min": 20.0,
+          "max": 25.0,
+          "is_constant": false
+        },
+        "Dg_mm": {
+          "raw": "20-25",
+          "min": 20.0,
+          "max": 25.0,
+          "is_constant": false
+        },
+        "FRP_BT": {
+          "raw": "2",
+          "min": 2,
+          "max": 2,
+          "is_constant": true,
+          "allowed_values": [
+            2
+          ]
+        },
+        "FRP_ST": {
+          "raw": "7",
+          "min": 7,
+          "max": 7,
+          "is_constant": true,
+          "allowed_values": [
+            7
+          ]
+        },
+        "Pu_kN": {
+          "raw": "7.17-21.60",
+          "min": 7.17,
+          "max": 21.6,
+          "is_constant": false
+        },
+        "FN": {
+          "raw": "7-11",
+          "min": 7,
+          "max": 11,
+          "is_constant": false,
+          "allowed_values": [
+            7,
+            8,
+            9,
+            10,
+            11
+          ]
+        }
+      }
+    },
+    {
+      "ref_id": "[32]",
+      "ref_num": 32,
+      "year": 2016,
+      "short_citation": "Bilotta et al. (2016)",
+      "full_citation": "Bilotta, A., F. Ceroni, J. A. O. Barros, I. Costa, A. Palmieri, Z. K. Szabó, E. Nigro, S. Matthys, G. L. Balazs, and M. Pecce. 2016. \"Bond of NSM FRP-Strengthened Concrete: Round Robin Test Initiative.\" Journal of Composites for Construction. 20(1): 04015026. https://doi.org/10.1061/(ASCE)CC.1943-5614.0000579",
+      "doi": "https://doi.org/10.1061/(ASCE)CC.1943-5614.0000579",
+      "notes": "",
+      "parameters": {
+        "fc_MPa": {
+          "raw": "37.5",
+          "min": 37.5,
+          "max": 37.5,
+          "is_constant": true
+        },
+        "Lb_mm": {
+          "raw": "300",
+          "min": 300.0,
+          "max": 300.0,
+          "is_constant": true
+        },
+        "Df_mm": {
+          "raw": "6-8",
+          "min": 6.0,
+          "max": 8.0,
+          "is_constant": false
+        },
+        "Ef_GPa": {
+          "raw": "46-187",
+          "min": 46.0,
+          "max": 187.0,
+          "is_constant": false
+        },
+        "ff_MPa": {
+          "raw": "1208-3536",
+          "min": 1208.0,
+          "max": 3536.0,
+          "is_constant": false
+        },
+        "Wg_mm": {
+          "raw": "9.5-14",
+          "min": 9.5,
+          "max": 14.0,
+          "is_constant": false
+        },
+        "Dg_mm": {
+          "raw": "10-14",
+          "min": 10.0,
+          "max": 14.0,
+          "is_constant": false
+        },
+        "FRP_BT": {
+          "raw": "1-3",
+          "min": 1,
+          "max": 3,
+          "is_constant": false,
+          "allowed_values": [
+            1,
+            2,
+            3
+          ]
+        },
+        "FRP_ST": {
+          "raw": "1-6",
+          "min": 1,
+          "max": 6,
+          "is_constant": false,
+          "allowed_values": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        "Pu_kN": {
+          "raw": "23-56.8",
+          "min": 23.0,
+          "max": 56.8,
+          "is_constant": false
+        },
+        "FN": {
+          "raw": "1-11",
+          "min": 1,
+          "max": 11,
+          "is_constant": false,
+          "allowed_values": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ]
+        }
+      }
+    },
+    {
+      "ref_id": "[33]",
+      "ref_num": 33,
+      "year": 2012,
+      "short_citation": "El-Gamal et al. (2012)",
+      "full_citation": "El-Gamal, S., Y. Al-Salloum, S. Alsayed, and M. Aqel. 2012. \"Performance of near surface mounted glass fiber reinforced polymer bars in concrete.\" Journal of Reinforced Plastics and Composites. 31(22): 1501-1515. https://doi.org/10.1177/0731684412464088",
+      "doi": "https://doi.org/10.1177/0731684412464088",
+      "notes": "",
+      "parameters": {
+        "fc_MPa": {
+          "raw": "46.5",
+          "min": 46.5,
+          "max": 46.5,
+          "is_constant": true
+        },
+        "Lb_mm": {
+          "raw": "203.2-406.4",
+          "min": 203.2,
+          "max": 406.4,
+          "is_constant": false
+        },
+        "Df_mm": {
+          "raw": "12.7",
+          "min": 12.7,
+          "max": 12.7,
+          "is_constant": true
+        },
+        "Ef_GPa": {
+          "raw": "60.4",
+          "min": 60.4,
+          "max": 60.4,
+          "is_constant": true
+        },
+        "ff_MPa": {
+          "raw": "1478",
+          "min": 1478.0,
+          "max": 1478.0,
+          "is_constant": true
+        },
+        "Wg_mm": {
+          "raw": "19.05-25.40",
+          "min": 19.05,
+          "max": 25.4,
+          "is_constant": false
+        },
+        "Dg_mm": {
+          "raw": "19.05-25.40",
+          "min": 19.05,
+          "max": 25.4,
+          "is_constant": false
+        },
+        "FRP_BT": {
+          "raw": "3",
+          "min": 3,
+          "max": 3,
+          "is_constant": true,
+          "allowed_values": [
+            3
+          ]
+        },
+        "FRP_ST": {
+          "raw": "5",
+          "min": 5,
+          "max": 5,
+          "is_constant": true,
+          "allowed_values": [
+            5
+          ]
+        },
+        "Pu_kN": {
+          "raw": "60.8-109.2",
+          "min": 60.8,
+          "max": 109.2,
+          "is_constant": false
+        },
+        "FN": {
+          "raw": "13",
+          "min": 13,
+          "max": 13,
+          "is_constant": true,
+          "allowed_values": [
+            13
+          ]
+        }
+      }
+    },
+    {
+      "ref_id": "[34]",
+      "ref_num": 34,
+      "year": 1999,
+      "short_citation": "Yan et al. (1999)",
+      "full_citation": "Yan, X., B. Miller, A. Nanni, and C. E. Bakis. 1999. Characterization of CFRP rods used as near surface mounted reinforcement. In eighth International conference on structural faults and repair. 1-12.",
+      "doi": "",
+      "notes": "",
+      "parameters": {
+        "fc_MPa": {
+          "raw": "34.20-36.20",
+          "min": 34.2,
+          "max": 36.2,
+          "is_constant": false
+        },
+        "Lb_mm": {
+          "raw": "50.80-152.40",
+          "min": 50.8,
+          "max": 152.4,
+          "is_constant": false
+        },
+        "Df_mm": {
+          "raw": "8-11",
+          "min": 8.0,
+          "max": 11.0,
+          "is_constant": false
+        },
+        "Ef_GPa": {
+          "raw": "227.54-234.43",
+          "min": 227.54,
+          "max": 234.43,
+          "is_constant": false
+        },
+        "ff_MPa": {
+          "raw": "3619.88-4826.50",
+          "min": 3619.88,
+          "max": 4826.5,
+          "is_constant": false
+        },
+        "Wg_mm": {
+          "raw": "14.29",
+          "min": 14.29,
+          "max": 14.29,
+          "is_constant": true
+        },
+        "Dg_mm": {
+          "raw": "19.05",
+          "min": 19.05,
+          "max": 19.05,
+          "is_constant": true
+        },
+        "FRP_BT": {
+          "raw": "2",
+          "min": 2,
+          "max": 2,
+          "is_constant": true,
+          "allowed_values": [
+            2
+          ]
+        },
+        "FRP_ST": {
+          "raw": "5",
+          "min": 5,
+          "max": 5,
+          "is_constant": true,
+          "allowed_values": [
+            5
+          ]
+        },
+        "Pu_kN": {
+          "raw": "37.19-127.52",
+          "min": 37.19,
+          "max": 127.52,
+          "is_constant": false
+        },
+        "FN": {
+          "raw": "7-10",
+          "min": 7,
+          "max": 10,
+          "is_constant": false,
+          "allowed_values": [
+            7,
+            8,
+            9,
+            10
+          ]
+        }
+      }
+    },
+    {
+      "ref_id": "[35]",
+      "ref_num": 35,
+      "year": 2021,
+      "short_citation": "Wang & Cheng (2021)",
+      "full_citation": "Wang, X., and L. Cheng. 2021. \"Bond characteristics and modeling of near-surface mounted CFRP in concrete.\" Composite Structures. 255: 113011. https://doi.org/10.1016/j.compstruct.2020.113011",
+      "doi": "https://doi.org/10.1016/j.compstruct.2020.113011",
+      "notes": "",
+      "parameters": {
+        "fc_MPa": {
+          "raw": "46.50-52.30",
+          "min": 46.5,
+          "max": 52.3,
+          "is_constant": false
+        },
+        "Lb_mm": {
+          "raw": "250",
+          "min": 250.0,
+          "max": 250.0,
+          "is_constant": true
+        },
+        "Df_mm": {
+          "raw": "9.50-10",
+          "min": 9.5,
+          "max": 10.0,
+          "is_constant": false
+        },
+        "Ef_GPa": {
+          "raw": "113-129",
+          "min": 113.0,
+          "max": 129.0,
+          "is_constant": false
+        },
+        "ff_MPa": {
+          "raw": "1489-2372",
+          "min": 1489.0,
+          "max": 2372.0,
+          "is_constant": false
+        },
+        "Wg_mm": {
+          "raw": "20",
+          "min": 20.0,
+          "max": 20.0,
+          "is_constant": true
+        },
+        "Dg_mm": {
+          "raw": "20",
+          "min": 20.0,
+          "max": 20.0,
+          "is_constant": true
+        },
+        "FRP_BT": {
+          "raw": "2",
+          "min": 2,
+          "max": 2,
+          "is_constant": true,
+          "allowed_values": [
+            2
+          ]
+        },
+        "FRP_ST": {
+          "raw": "3-7",
+          "min": 3,
+          "max": 7,
+          "is_constant": false,
+          "allowed_values": [
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "Pu_kN": {
+          "raw": "46.20-90.40",
+          "min": 46.2,
+          "max": 90.4,
+          "is_constant": false
+        },
+        "FN": {
+          "raw": "5-11",
+          "min": 5,
+          "max": 11,
+          "is_constant": false,
+          "allowed_values": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ]
+        }
+      }
+    },
+    {
+      "ref_id": "[36]",
+      "ref_num": 36,
+      "year": 2019,
+      "short_citation": "Wang et al. (2019)",
+      "full_citation": "Wang, Q., H. Li, T. Zhu, G. Wu, and X. Hu. 2019. \"Bond performance of NSM FRP bars in concrete with an innovative additional ribs anchorage system: An experimental study.\" Construction and Building Materials. 207: 572-584. https://doi.org/10.1016/j.conbuildmat.2019.02.020",
+      "doi": "https://doi.org/10.1016/j.conbuildmat.2019.02.020",
+      "notes": "",
+      "parameters": {
+        "fc_MPa": {
+          "raw": "47.83",
+          "min": 47.83,
+          "max": 47.83,
+          "is_constant": true
+        },
+        "Lb_mm": {
+          "raw": "40-240",
+          "min": 40.0,
+          "max": 240.0,
+          "is_constant": false
+        },
+        "Df_mm": {
+          "raw": "10",
+          "min": 10.0,
+          "max": 10.0,
+          "is_constant": true
+        },
+        "Ef_GPa": {
+          "raw": "50-103",
+          "min": 50.0,
+          "max": 103.0,
+          "is_constant": false
+        },
+        "ff_MPa": {
+          "raw": "1030-1366",
+          "min": 1030.0,
+          "max": 1366.0,
+          "is_constant": false
+        },
+        "Wg_mm": {
+          "raw": "20-25",
+          "min": 20.0,
+          "max": 25.0,
+          "is_constant": false
+        },
+        "Dg_mm": {
+          "raw": "20-25",
+          "min": 20.0,
+          "max": 25.0,
+          "is_constant": false
+        },
+        "FRP_BT": {
+          "raw": "1-2",
+          "min": 1,
+          "max": 2,
+          "is_constant": false,
+          "allowed_values": [
+            1,
+            2
+          ]
+        },
+        "FRP_ST": {
+          "raw": "1",
+          "min": 1,
+          "max": 1,
+          "is_constant": true,
+          "allowed_values": [
+            1
+          ]
+        },
+        "Pu_kN": {
+          "raw": "12.27-75.48",
+          "min": 12.27,
+          "max": 75.48,
+          "is_constant": false
+        },
+        "FN": {
+          "raw": "1-13",
+          "min": 1,
+          "max": 13,
+          "is_constant": false,
+          "allowed_values": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+          ]
+        }
+      }
+    },
+    {
+      "ref_id": "[37]",
+      "ref_num": 37,
+      "year": 2023,
+      "short_citation": "Aljidda et al. (2023)",
+      "full_citation": "Aljidda, O., A. El Refai, and W. Alnahhal. 2023. \"Comparative study on the bond performance of near-surface mounted fiber-reinforced polymer bars.\" Construction and Building Materials. 364: 129923. https://doi.org/10.1016/j.conbuildmat.2022.129923",
+      "doi": "https://doi.org/10.1016/j.conbuildmat.2022.129923",
+      "notes": "Source Table S3 prints \"1.5\" for categorical FRPST in [37]; treated as discrete surface codes [1, 5] (min=1, max=5).",
+      "parameters": {
+        "fc_MPa": {
+          "raw": "66.25",
+          "min": 66.25,
+          "max": 66.25,
+          "is_constant": true
+        },
+        "Lb_mm": {
+          "raw": "57.66-267.60",
+          "min": 57.66,
+          "max": 267.6,
+          "is_constant": false
+        },
+        "Df_mm": {
+          "raw": "9.61-11.15",
+          "min": 9.61,
+          "max": 11.15,
+          "is_constant": false
+        },
+        "Ef_GPa": {
+          "raw": "52-120",
+          "min": 52.0,
+          "max": 120.0,
+          "is_constant": false
+        },
+        "ff_MPa": {
+          "raw": "1100-1800",
+          "min": 1100.0,
+          "max": 1800.0,
+          "is_constant": false
+        },
+        "Wg_mm": {
+          "raw": "20",
+          "min": 20.0,
+          "max": 20.0,
+          "is_constant": true
+        },
+        "Dg_mm": {
+          "raw": "20",
+          "min": 20.0,
+          "max": 20.0,
+          "is_constant": true
+        },
+        "FRP_BT": {
+          "raw": "1-3",
+          "min": 1,
+          "max": 3,
+          "is_constant": false,
+          "allowed_values": [
+            1,
+            2,
+            3
+          ]
+        },
+        "FRP_ST": {
+          "raw": "1.5",
+          "min": 1,
+          "max": 5,
+          "is_constant": false,
+          "allowed_values": [
+            1,
+            5
+          ]
+        },
+        "Pu_kN": {
+          "raw": "27.7-54.4",
+          "min": 27.7,
+          "max": 54.4,
+          "is_constant": false
+        },
+        "FN": {
+          "raw": "1-9",
+          "min": 1,
+          "max": 9,
+          "is_constant": false,
+          "allowed_values": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ]
+        }
+      }
+    },
+    {
+      "ref_id": "[38]",
+      "ref_num": 38,
+      "year": 2013,
+      "short_citation": "Sharaky et al. (2013)",
+      "full_citation": "Sharaky, I. A., L. Torres, M. Baena, and I. Vilanova. 2013. \"Effect of different material and construction details on the bond behaviour of NSM FRP bars in concrete.\" Construction and Building Materials. 38, 890-902. https://doi.org/10.1016/j.conbuildmat.2012.09.015",
+      "doi": "https://doi.org/10.1016/j.conbuildmat.2012.09.015",
+      "notes": "",
+      "parameters": {
+        "fc_MPa": {
+          "raw": "35.20-42.20",
+          "min": 35.2,
+          "max": 42.2,
+          "is_constant": false
+        },
+        "Lb_mm": {
+          "raw": "40-192",
+          "min": 40.0,
+          "max": 192.0,
+          "is_constant": false
+        },
+        "Df_mm": {
+          "raw": "8-12",
+          "min": 8.0,
+          "max": 12.0,
+          "is_constant": false
+        },
+        "Ef_GPa": {
+          "raw": "41-170",
+          "min": 41.0,
+          "max": 170.0,
+          "is_constant": false
+        },
+        "ff_MPa": {
+          "raw": "765-2350",
+          "min": 765.0,
+          "max": 2350.0,
+          "is_constant": false
+        },
+        "Wg_mm": {
+          "raw": "12-21.80",
+          "min": 12.0,
+          "max": 21.8,
+          "is_constant": false
+        },
+        "Dg_mm": {
+          "raw": "12-30",
+          "min": 12.0,
+          "max": 30.0,
+          "is_constant": false
+        },
+        "FRP_BT": {
+          "raw": "2-3",
+          "min": 2,
+          "max": 3,
+          "is_constant": false,
+          "allowed_values": [
+            2,
+            3
+          ]
+        },
+        "FRP_ST": {
+          "raw": "2-7",
+          "min": 2,
+          "max": 7,
+          "is_constant": false,
+          "allowed_values": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "Pu_kN": {
+          "raw": "10.37-63.77",
+          "min": 10.37,
+          "max": 63.77,
+          "is_constant": false
+        },
+        "FN": {
+          "raw": "1-13",
+          "min": 1,
+          "max": 13,
+          "is_constant": false,
+          "allowed_values": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+          ]
+        }
+      }
+    },
+    {
+      "ref_id": "[39]",
+      "ref_num": 39,
+      "year": 2016,
+      "short_citation": "Torres et al. (2016)",
+      "full_citation": "Torres, L., I. A. Sharaky, C. Barris, and M. Baena. 2016. Experimental study of the influence of adhesive properties and bond length on the bond behaviour of NSM FRP bars in concrete. Journal of Civil Engineering and Management. 22(6): 808-817. https://doi.org/10.3846/13923730.2014.914097",
+      "doi": "https://doi.org/10.3846/13923730.2014.914097",
+      "notes": "",
+      "parameters": {
+        "fc_MPa": {
+          "raw": "28.75",
+          "min": 28.75,
+          "max": 28.75,
+          "is_constant": true
+        },
+        "Lb_mm": {
+          "raw": "48-240",
+          "min": 48.0,
+          "max": 240.0,
+          "is_constant": false
+        },
+        "Df_mm": {
+          "raw": "8",
+          "min": 8.0,
+          "max": 8.0,
+          "is_constant": true
+        },
+        "Ef_GPa": {
+          "raw": "64-170",
+          "min": 64.0,
+          "max": 170.0,
+          "is_constant": false
+        },
+        "ff_MPa": {
+          "raw": "1350-2310",
+          "min": 1350.0,
+          "max": 2310.0,
+          "is_constant": false
+        },
+        "Wg_mm": {
+          "raw": "16",
+          "min": 16.0,
+          "max": 16.0,
+          "is_constant": true
+        },
+        "Dg_mm": {
+          "raw": "16",
+          "min": 16.0,
+          "max": 16.0,
+          "is_constant": true
+        },
+        "FRP_BT": {
+          "raw": "2-3",
+          "min": 2,
+          "max": 3,
+          "is_constant": false,
+          "allowed_values": [
+            2,
+            3
+          ]
+        },
+        "FRP_ST": {
+          "raw": "1-4",
+          "min": 1,
+          "max": 4,
+          "is_constant": false,
+          "allowed_values": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "Pu_kN": {
+          "raw": "18.99-60.87",
+          "min": 18.99,
+          "max": 60.87,
+          "is_constant": false
+        },
+        "FN": {
+          "raw": "2-16",
+          "min": 2,
+          "max": 16,
+          "is_constant": false,
+          "allowed_values": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "ref_id": "[40]",
+      "ref_num": 40,
+      "year": 2009,
+      "short_citation": "Galati & De Lorenzis (2009)",
+      "full_citation": "Galati, D., and L. De Lorenzis. 2009. \"Effect of Construction Details on the Bond Performance of NSM FRP Bars in Concrete.\" Advances in Structural Engineering. 12(5): 683-700. https://doi.org/10.1260/136943309789867836",
+      "doi": "https://doi.org/10.1260/136943309789867836",
+      "notes": "",
+      "parameters": {
+        "fc_MPa": {
+          "raw": "46.3",
+          "min": 46.3,
+          "max": 46.3,
+          "is_constant": true
+        },
+        "Lb_mm": {
+          "raw": "37.5-180",
+          "min": 37.5,
+          "max": 180.0,
+          "is_constant": false
+        },
+        "Df_mm": {
+          "raw": "5-24",
+          "min": 5.0,
+          "max": 24.0,
+          "is_constant": false
+        },
+        "Ef_GPa": {
+          "raw": "145.7",
+          "min": 145.7,
+          "max": 145.7,
+          "is_constant": true
+        },
+        "ff_MPa": {
+          "raw": "2214",
+          "min": 2214.0,
+          "max": 2214.0,
+          "is_constant": true
+        },
+        "Wg_mm": {
+          "raw": "12-20",
+          "min": 12.0,
+          "max": 20.0,
+          "is_constant": false
+        },
+        "Dg_mm": {
+          "raw": "12-16",
+          "min": 12.0,
+          "max": 16.0,
+          "is_constant": false
+        },
+        "FRP_BT": {
+          "raw": "2",
+          "min": 2,
+          "max": 2,
+          "is_constant": true,
+          "allowed_values": [
+            2
+          ]
+        },
+        "FRP_ST": {
+          "raw": "7",
+          "min": 7,
+          "max": 7,
+          "is_constant": true,
+          "allowed_values": [
+            7
+          ]
+        },
+        "Pu_kN": {
+          "raw": "10.9-50.2",
+          "min": 10.9,
+          "max": 50.2,
+          "is_constant": false
+        },
+        "FN": {
+          "raw": "2-13",
+          "min": 2,
+          "max": 13,
+          "is_constant": false,
+          "allowed_values": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+          ]
+        }
+      }
+    }
+  ]
+}

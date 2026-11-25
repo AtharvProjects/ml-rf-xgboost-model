@@ -126,10 +126,10 @@ In cell `J2` (where `A2:I2` are inputs $X_1 \dots X_9$):
 ## 📂 Module 4: NSM FRP Bond Strength & Failure Mode (Kumar et al., 2024 Replication)
 
 Located in [`nsm_frp_bond_strength/`](./nsm_frp_bond_strength/):
-- **Datasheet**: 416 NSM FRP-to-concrete pullout records with **9 input parameters** ($f'_c, L_b, D_f, E_f, f_f, W_g, D_g, FRP_{BT}, FRP_{ST}$) and **2 outputs** (Bond strength $P_u$ in kN & Failure Mode $F_N$ 1–16), split **70% Training (291) / 30% Testing (125)**.
+- **Datasheet & Table S3 Grounding**: 416 NSM FRP-to-concrete pullout records with **9 input parameters** ($f'_c, L_b, D_f, E_f, f_f, W_g, D_g, FRP_{BT}, FRP_{ST}$) and **2 outputs** (Bond strength $P_u$ in kN & Failure Mode $F_N$ 1–16), split **70% Training (291) / 30% Testing (125)**, grounded in the 20 experimental literature studies (`[21]`–`[40]`) parsed from Supplementary Table S3 ([`table_s3_sources.csv`](./nsm_frp_bond_strength/data/table_s3_sources.csv), [`table_s3_sources.json`](./nsm_frp_bond_strength/data/table_s3_sources.json)).
 - **Models**: 6 ML models (`XGBoost`, `GBT`, `RF`, `ANN`, `DT`, `LR`) compared against 5 structural design guidelines & analytical equations (`ACI 440.2R-08`, `SA HB 305`, `ACI 440.1R-15`, `Zhang et al.`, `CSA-S806`).
-- **Best Performance (XGBoost)**: $R = \mathbf{0.9945}$, $R^2 = \mathbf{0.9891}$, $\text{RMSE} = \mathbf{2.41\text{ kN}}$, $\text{SI} = \mathbf{0.0578}$.
-- **Diagrams Generated**: Donut variable distributions (`Fig. 1–2`), 3-panel Scatter / Error Frequency / Performance Ratio diagnostics (`Fig. 4–13`), Radar comparisons (`Fig. 14`), Taylor plots (`Fig. 15`), Failure mode scatter (`Fig. 16`), TreeSHAP explainability (`Fig. 17`), Partial Dependence & ICE curves (`Fig. 18`), and NSM specimen schematic (`Fig. 19`).
+- **Best Performance (XGBoost)**: $R = \mathbf{0.9933}$, $R^2 = \mathbf{0.9865}$, $\text{RMSE} = \mathbf{1.97\text{ kN}}$, $\text{SI} = \mathbf{0.0486}$ (Testing $R^2 = \mathbf{0.9419}$, $87.98\%$ exact $F_N$ match).
+- **Diagrams Generated**: Donut variable distributions (`Fig. 1–2`), 3-panel Scatter / Error Frequency / Performance Ratio diagnostics (`Fig. 4–13`), Radar comparisons (`Fig. 14`), Taylor plots (`Fig. 15`), Failure mode scatter (`Fig. 16`), TreeSHAP explainability (`Fig. 17`), Partial Dependence & ICE curves (`Fig. 18`), NSM specimen schematic (`Fig. 19`), and Table S3 per-study breakdown (`Fig. 20`).
 - **Interactive Web GUI & CLI**: Launch `streamlit run app.py` or test custom specimens via `python3 predict_custom.py`. See [nsm_frp_bond_strength/README.md](./nsm_frp_bond_strength/README.md) for complete tables and equations.
 
 ---
@@ -167,9 +167,13 @@ ml-rf-xgboost-model/
     ├── run_pipeline.sh                    # One-click runner for all steps & plots
     ├── app.py                             # Streamlit Web GUI (Fig. 19 replica)
     ├── predict_custom.py                  # Single & CSV batch CLI prediction tool
-    ├── data/nsm_frp_bond_dataset.csv      # 416 NSM FRP records (9 inputs, Pu & FN)
+    ├── data/                              # 416 NSM FRP records + parsed Table S3 ([21]-[40])
+    │   ├── parse_table_s3.py              # Table S3 parser -> CSV & JSON
+    │   ├── table_s3_sources.{csv,json}    # 20 studies ([21]-[40]) bounds & citations
+    │   └── nsm_frp_bond_dataset.csv       # 416 NSM FRP records (9 inputs, Pu & FN)
+    ├── src/table_s3.py                    # Table S3 bounds verification & study audit
     ├── models/                            # 6 ML models + scaler + derived formulas
-    └── plots/                             # Figs. 1, 2, 4-19 (SHAP, PDP, Taylor, Radar)
+    ├── plots/                             # Figs. 1, 2, 4-20 (SHAP, PDP, Taylor, Radar, Table S3)
 ```
 
 ---

@@ -14,6 +14,7 @@ import streamlit as st
 
 from src.preprocess import FEATURE_COLUMNS
 from src.analytical_models import ANALYTICAL_MODELS
+from src.table_s3 import match_record_to_studies
 from src.train import power_law_func
 from data.generate_data import FAILURE_DESCRIPTIONS, FRP_BAR_TYPES, FRP_SURFACE_TYPES
 
@@ -106,6 +107,18 @@ def main():
     with col2:
         st.info(f"### Predicted Failure Mode: **FN {xgb_fn_code} ({fail_id})**")
         st.caption(f"Mechanism: {fail_desc}")
+
+    # Table S3 Reference Provenance Check
+    s3_res = match_record_to_studies(input_df.iloc[0].to_dict(), columns=FEATURE_COLUMNS, top_k=2, strict_allowed=True)
+    if s3_res["exact_match_count"] > 0:
+        matched_lbl = ", ".join(f"{m['ref_id']} {m['short_citation']}" for m in s3_res["exact_matches"])
+        st.caption(f"📚 **Table S3 Envelope Match**: {matched_lbl}")
+    else:
+        top_s3 = s3_res["closest_studies"][0]
+        st.caption(
+            f"📚 **Closest Table S3 Study**: {top_s3['ref_id']} {top_s3['short_citation']} "
+            f"(normalized distance={top_s3['normalized_distance']}, outside={', '.join(top_s3['out_of_bounds_params'])})"
+        )
 
     # Cross-model comparison + Analytical Codes + Empirical Formula
     st.subheader("Comparison Across ML Models, Empirical Formula & Design Guidelines")

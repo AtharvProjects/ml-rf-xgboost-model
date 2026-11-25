@@ -1,30 +1,30 @@
 {
     "linear_regression": {
-        "intercept": -38.131,
+        "intercept": -61.6788,
         "coefficients": {
-            "fc_MPa": 0.5051,
-            "Lb_mm": 0.1368,
-            "Df_mm": -0.0434,
-            "Ef_GPa": 0.0852,
-            "ff_MPa": 0.0037,
-            "Wg_mm": 0.3473,
-            "Dg_mm": 0.4212,
-            "FRP_BT": 0.4296,
-            "FRP_ST": 0.5311
+            "fc_MPa": 0.4624,
+            "Lb_mm": 0.1404,
+            "Df_mm": 1.9932,
+            "Ef_GPa": 0.1038,
+            "ff_MPa": 0.0094,
+            "Wg_mm": 0.0675,
+            "Dg_mm": 0.3416,
+            "FRP_BT": 3.9473,
+            "FRP_ST": -1.2561
         }
     },
     "nonlinear_power_law": {
-        "alpha": 0.01194,
+        "alpha": 0.0004,
         "exponents": {
-            "fc_MPa": 0.4039,
-            "Lb_mm": 0.5929,
-            "Df_mm": 0.1709,
-            "Ef_GPa": 0.2006,
-            "ff_MPa": 0.2399,
-            "Wg_mm": 0.0657,
-            "Dg_mm": 0.0931,
-            "FRP_BT": 0.0236,
-            "FRP_ST": 0.0395
+            "fc_MPa": 0.3656,
+            "Lb_mm": 0.5901,
+            "Df_mm": 0.5012,
+            "Ef_GPa": 0.1416,
+            "ff_MPa": 0.5972,
+            "Wg_mm": -0.0282,
+            "Dg_mm": 0.3282,
+            "FRP_BT": 0.1143,
+            "FRP_ST": -0.0326
         }
     }
 }
